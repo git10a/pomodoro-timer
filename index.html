@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ポモドーロタイマー</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #timer {
+            font-size: 48px;
+            margin: 20px;
+        }
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button#stop {
+            background-color: #f44336;
+        }
+    </style>
+</head>
+<body>
+    <div id="pomodoro-timer">
+        <div id="timer">25:00</div>
+        <button id="start">開始</button>
+        <button id="stop">停止</button>
+    </div>
+    <script>
+        let timer;
+        let timeLeft = 25 * 60;
+        let isRunning = false;
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+            const seconds = (timeLeft % 60).toString().padStart(2, '0');
+            document.getElementById("timer").textContent = `${minutes}:${seconds}`;
+        }
+
+        function startTimer() {
+            if (isRunning) return;
+            isRunning = true;
+            timer = setInterval(() => {
+                if (timeLeft > 0) {
+                    timeLeft--;
+                    updateTimerDisplay();
+                } else {
+                    clearInterval(timer);
+                    alert("タイマーが終了しました！");
+                    isRunning = false;
+                    timeLeft = 25 * 60; // リセット
+                }
+            }, 1000);
+        }
+
+        function stopTimer() {
+            clearInterval(timer);
+            isRunning = false;
+        }
+
+        document.getElementById("start").addEventListener("click", startTimer);
+        document.getElementById("stop").addEventListener("click", stopTimer);
+
+        updateTimerDisplay();
+    </script>
+</body>
+</html>
