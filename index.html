@@ -6,30 +6,37 @@
     <title>ポモドーロタイマー</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Noto Sans JP', sans-serif;
             text-align: center;
             background-color: transparent; /* 背景を透明に */
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* 上下の余白を均等に */
+            align-items: center;
+            height: 100vh; /* 画面全体の高さを確保 */
+            box-sizing: border-box;
+        }
+        #tips {
+            font-size: 12px; /* 文字サイズをさらに小さく調整 */
+            margin: 10px 0; /* 上下のマージンを調整 */
+            color: white; /* 文字色を白に */
+            line-height: 1.5; /* 行間を調整 */
+        }
+        #pomodoro-timer {
+            flex-grow: 1; /* タイマー部分を中央に配置 */
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        #tips {
-            font-size: 20px;
-            margin-bottom: 20px;
-            color: #333;
-            font-weight: bold;
         }
         #timer {
-            font-size: 48px;
-            margin: 20px;
+            font-size: 36px; /* スマホでも見やすいサイズに調整 */
+            margin: 10px;
         }
         button {
-            font-size: 18px;
-            padding: 10px 20px;
+            font-size: 14px; /* ボタンの文字サイズを調整 */
+            padding: 8px 16px;
             margin: 5px;
             background-color: #4CAF50;
             color: white;
@@ -41,6 +48,8 @@
             background-color: #f44336;
         }
     </style>
+    <!-- Noto Sans JP フォントの読み込み -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="tips">今日の集中Tips：ここに表示されます</div>
@@ -52,11 +61,11 @@
     <script>
         // Tipsのリスト
         const tipsList = [
-            "5分間の休憩では、ただ目を閉じてぼーっとするのがおすすめです",    
-            "タスクをもう1段階小分けにすると、やることがより明確になります",
+            "5分間の休憩では、ただ目を閉じてぼーっとするのがおすすめです。",    
+            "タスクをもう1段階小分けにすると、やることがより明確になります。",
             "適度に水を飲んで集中力をキープ！",
             "背筋を伸ばして深呼吸をしてみよう！",
-            "机の上を整理して周辺視野の刺激を減らすのも、集中力アップが期待できます"
+            "机の上を整理して周辺視野の刺激を減らすのも、集中力アップが期待できます！"
         ];
 
         // ランダムなTipsを表示
