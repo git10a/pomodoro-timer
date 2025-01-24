@@ -5,18 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ポモドーロタイマー</title>
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        background-color: transparent; /* 背景を透明に変更 */
-        margin: 0;
-        padding: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-            }
-
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: transparent; /* 背景を透明に */
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #tips {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: bold;
+        }
         #timer {
             font-size: 48px;
             margin: 20px;
@@ -37,12 +43,32 @@
     </style>
 </head>
 <body>
+    <div id="tips">今日の集中Tips：ここに表示されます</div>
     <div id="pomodoro-timer">
         <div id="timer">25:00</div>
         <button id="start">開始</button>
         <button id="stop">停止</button>
     </div>
     <script>
+        // Tipsのリスト
+        const tipsList = [
+            "5分間の休憩では、ただ目を閉じてぼーっとするのがおすすめです",    
+            "タスクをもう1段階小分けにすると、やることがより明確になります",
+            "適度に水を飲んで集中力をキープ！",
+            "背筋を伸ばして深呼吸をしてみよう！",
+            "机の上を整理して周辺視野の刺激を減らすのも、集中力アップが期待できます"
+        ];
+
+        // ランダムなTipsを表示
+        function displayRandomTip() {
+            const randomTip = tipsList[Math.floor(Math.random() * tipsList.length)];
+            document.getElementById("tips").textContent = `今日の集中Tips：${randomTip}`;
+        }
+
+        // ページ読み込み時にランダムTipsを表示
+        window.onload = displayRandomTip;
+
+        // タイマー関連の処理
         let timer;
         let timeLeft = 25 * 60;
         let isRunning = false;
